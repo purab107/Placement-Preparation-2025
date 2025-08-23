@@ -1,17 +1,15 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-bool binarySearch(int *arr, int n, int key) {
-    int low = 0, high = n - 1;
-    while (low <= high) {
+bool binarySearch(vector<int>& vec, int n, int target) {
+    int low = 0, high= n-1;
+    while(low<=high){
         int mid = low + (high - low) / 2;
-        if (arr[mid] == key) return true;
-        else if (key < arr[mid]) {
-            high = mid - 1;
-        } else {
-            low = mid + 1;
-        }
+        if(vec[mid] == target) return true;
+        else if(vec[mid] > target) high = mid - 1;
+        else low  = mid + 1;
     }
     return false;
 }
@@ -19,13 +17,25 @@ bool binarySearch(int *arr, int n, int key) {
 
 int main() {
     // Your code starts here
+    vector<int> vec;
+    int n;
 
-    int arr[] = {2, 3, 4, 5, 6, 7};
-    int n = sizeof(arr) / sizeof(int);
+    cout << "Enter number of elements: ";
+    cin >> n;
 
-    int key = 0;
+    cout << "Enter elements: ";
+    for (int i = 0; i < n; i++) {
+        int val;
+        cin >> val;
+        vec.push_back(val);
+    }
+    
+    int target;
+    cout << "Enter Any Target : ";
+    cin >> target;
 
-    if(binarySearch(arr, n, key)){
+
+    if(binarySearch(vec, n, target)){
         cout << "element found!";
     }else{
         cout << "element not found!";
